@@ -1,0 +1,20 @@
+popular list:
+https://api.themoviedb.org/3/movie/popular?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US&page=1
+
+movie:
+https://api.themoviedb.org/3/movie/766507?api_key=ebd6eb049208c031ad4e334c95622196
+
+movie credits:
+https://api.themoviedb.org/3/movie/766507/credits?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US
+
+movie recommendations:
+https://api.themoviedb.org/3/movie/766507/recommendations?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US&page=1
+
+movie videos:
+https://api.themoviedb.org/3/movie/766507/videos?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US
+
+movie reviews:
+https://api.themoviedb.org/3/movie/766507/reviews?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US&page=1
+
+genres:
+https://api.themoviedb.org/3/genre/movie/list?api_key=ebd6eb049208c031ad4e334c95622196&language=en-US

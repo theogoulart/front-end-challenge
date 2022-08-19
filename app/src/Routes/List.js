@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import response from '../Blob/response'
+import response from '../Response/list'
 
 import MovieCard from '../Components/MovieCard'
 
