@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
+
 const URL = "https://image.tmdb.org/t/p/original";
 
 function MovieCard(props) {
   const movie = props.movie;
   return (
-    <div className="App-header">
+    <Link to={`/movie/${movie.id}`}>
       <img width="176" height="264" alt="" src={URL + movie.poster_path} />
-      <b>{movie.original_title}</b>
-      {movie.release_date}
-    </div>
+      <div><b>{movie.original_title}</b></div>
+      <div>{movie.release_date}</div>
+    </Link>
   );
 }
 

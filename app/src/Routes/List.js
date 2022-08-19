@@ -2,13 +2,13 @@ import response from '../Blob/response'
 
 import MovieCard from '../Components/MovieCard'
 
-function Body() {
+function List() {
   console.log(response);
   return (
-    <section className="App-body">
+    <section className="App-List">
       {response.results.map((movie, i) => (<MovieCard key={i} movie={movie}/>))}
     </section>
   );
 }
 
-export default Body;
+export default List;

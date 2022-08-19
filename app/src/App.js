@@ -1,15 +1,21 @@
-import './App.css';
-import response from './Blob/response'
+// import './App.css';
+import { Routes, Route } from "react-router-dom";
 
-import Body from './Components/Body'
+import List from './Routes/List'
+import Movie from './Routes/Movie'
+
 import Header from './Components/Header'
 
 function App() {
-  console.log(response);
   return (
     <div className="App">
       <Header/>
-      <Body/>
+      <Routes>
+        <Route path="/" element={<List />} />
+        <Route path="movie" element={<Movie />}>
+          <Route path=":movieId" element={<Movie />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
