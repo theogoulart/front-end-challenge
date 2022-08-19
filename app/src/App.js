@@ -11,7 +11,9 @@ function App() {
     <div className="App">
       <Header/>
       <Routes>
-        <Route path="/" element={<List />} />
+        <Route path="/" element={<List />} >
+          <Route path="page/:page" element={<List />} />
+        </Route>
         <Route path="movie" element={<Movie />}>
           <Route path=":movieId" element={<Movie />} />
         </Route>
