@@ -9,10 +9,10 @@ function Movie() {
   
   console.log(params.movieId);
   return (
-    <section className="App-Movie">
+    <section>
       <img width="383" height="574" alt="" src={URL + movie.poster_path}/>
       <div>
-        <h1>{movie.original_title} ({releaseDate.getFullYear()})</h1>
+        <h1 className="text-xl">{movie.original_title} ({releaseDate.getFullYear()})</h1>
         <p>
           {`${("0" + releaseDate.getDate()).substring(-2)}/${("0" + releaseDate.getMonth()).substring(-2)}/${releaseDate.getFullYear()}`} (BR)
           • {movie.genres.map(genre => genre.name).join(', ')} • {Math.floor(movie.runtime/60)}h {movie.runtime%60}m

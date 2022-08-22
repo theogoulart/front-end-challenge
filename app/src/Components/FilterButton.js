@@ -1,9 +1,10 @@
-function Header() {
+function FilterButton(props) {
+  const genreName = props.genre;
   return (
-    <header className="App-header">
-        <b>TMDB</b>
-    </header>
+    <button className="bg-white text-black font-bold px-4 py-2 m-2 rounded">
+      {genreName}
+    </button>
   );
 }
 
-export default Header;
+export default FilterButton;
