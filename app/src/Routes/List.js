@@ -8,7 +8,7 @@ import Pagination from '../Components/Pagination'
 function List() {
   return (
     <div className="">
-      <section className="flex flex-col justify-center items-center bg-indigo-900 text-white p-20">
+      <section className="flex flex-col justify-center items-center bg-purple-custom text-white p-20">
         <h1 className="text-5xl font-bold max-w-screen-md text-center mb-10">Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
         <p className="mb-4 text-center">FILTRE POR:</p>
         <div className="flex flex-wrap justify-center items-center no-wrap max-w-screen-md">
