@@ -5,6 +5,7 @@ import PersonCard from '../Components/PersonCard';
 import movie from '../Response/movie.json';
 import videos from '../Response/videos.json';
 import credits from '../Response/credits.json';
+import reviews from '../Response/reviews.json';
 import recommendations from '../Response/recommendations.json';
 
 const URL = "https://image.tmdb.org/t/p/original";
@@ -15,8 +16,15 @@ function Movie() {
 
   const crew = credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
   const trailer = videos.results.filter(v => v.type === "Trailer")[0];
-  
-  console.log(params.movieId);
+
+  const movieRatings = [];
+  reviews.results.forEach((item) => {
+    if (!isNaN(item.author_details.rating)) {
+      movieRatings.push(item.author_details.rating);
+    }
+  });
+  const movieRating = Math.floor((movieRatings.reduce((p,c) => p+c, 0) / movieRatings.length) * 10);
+
   return (
     <div>
       <section className="flex justify-center items-center bg-purple-custom text-white px-5 md:px-4 py-10 pb-16 md:py-14">
@@ -31,7 +39,7 @@ function Movie() {
               <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{movie.genres.map(genre => genre.name).join(', ')}</span> <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{Math.floor(movie.runtime/60)}h {movie.runtime%60}m</span>
             </p>
             <div className="flex items-center mb-8">
-              <div class="progress-radial progress-76"><b></b></div>
+              <div className={`progress-radial progress-${movieRating}`}><b></b></div>
               <p className="leading-5 ml-3">Avaliação dos<br/>usuários</p>
             </div>
             <h2 className="text-xl font-bold mb-2">Sinopse</h2>
