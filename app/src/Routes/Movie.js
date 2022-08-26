@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom";
+import MovieCard from '../Components/MovieCard';
+import PersonCard from '../Components/PersonCard';
+
 import movie from '../Response/movie.json';
+import videos from '../Response/videos.json';
 import credits from '../Response/credits.json';
+import recommendations from '../Response/recommendations.json';
 
 const URL = "https://image.tmdb.org/t/p/original";
 
@@ -9,6 +14,7 @@ function Movie() {
   const releaseDate = new Date(movie.release_date);
 
   const crew = credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
+  const trailer = videos.results.filter(v => v.type === "Trailer")[0];
   
   console.log(params.movieId);
   return (
@@ -44,13 +50,15 @@ function Movie() {
       <section className="flex justify-center items-center px-4 py-16">
         <div className="flex flex-col w-full	max-w-7xl">
           <h2 className="text-neutral-900 text-2xl font-bold mb-8">Elenco original</h2>
-          <div className="flex">
-            <div>
-              
-            </div>
+          <div className="flex w-full	max-w-7xl overflow-auto pb-6 mb-10">
+            {credits.cast.map(c => (<PersonCard person={c}/>))}
           </div>
           <h2 className="text-neutral-900 text-2xl font-bold mb-8">Trailer</h2>
+          <iframe className="mb-14" width="907" height="510" src={`https://www.youtube.com/embed/${trailer.key}`}/>
           <h2 className="text-neutral-900 text-2xl font-bold mb-8">Recomendações</h2>
+          <div className="grid grid-cols-6 w-full	max-w-7xl pb-6 mb-10">
+            {recommendations.results.slice(0,6).map(v => (<MovieCard movie={v}/>))}
+          </div>
         </div>
       </section>
     </div>
