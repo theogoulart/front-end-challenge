@@ -6,6 +6,7 @@ import FilterButton from '../Components/FilterButton'
 import Pagination from '../Components/Pagination'
 
 function List() {
+  console.log(process.env.REACT_APP_API_KEY);
   return (
     <div className="">
       <section className="flex flex-col md:items-center bg-purple-custom text-white p-4 py-14 md:p-20">

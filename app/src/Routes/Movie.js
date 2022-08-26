@@ -12,6 +12,7 @@ const URL = "https://image.tmdb.org/t/p/original";
 
 function Movie() {
   const params = useParams();
+  console.log(params.movieId);
   const releaseDate = new Date(movie.release_date);
 
   const crew = credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
@@ -63,7 +64,7 @@ function Movie() {
           </div>
           <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Trailer</h2>
           <div className="video-container max-w-4xl mb-14">
-            <iframe className="w-full" src={`https://www.youtube.com/embed/${trailer.key}`}/>
+            <iframe title="movie trailer" className="w-full" src={`https://www.youtube.com/embed/${trailer.key}`}/>
           </div>
           <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Recomendações</h2>
           <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 lg:grid-cols-6 w-full max-w-7xl pb-6 mb-10">
