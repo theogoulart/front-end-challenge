@@ -45,6 +45,7 @@ function Movie() {
     } catch (exception) {
       console.error(404);
     }
+    window.scrollTo(0, 0);
   }, [movieID]);
 
   if (data.length === 0) return (<div>404</div>);
