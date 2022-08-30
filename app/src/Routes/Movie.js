@@ -49,7 +49,7 @@ function Movie() {
   }, [movieID]);
 
   if (data.length === 0) return (<div>404</div>);
-  console.log(data);
+
   const releaseDate = new Date(data.movie.release_date);
 
   const crew = data.credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
@@ -73,7 +73,7 @@ function Movie() {
           <div className="text-left">
             <h1 className="text-3xl font-bold mb-2">{data.movie.original_title} ({releaseDate.getFullYear()})</h1>
             <p className="text-lg mb-8 md:mb-4">
-              {`${("0" + releaseDate.getDate()).substring(-2)}/${("0" + releaseDate.getMonth()).substring(-2)}/${releaseDate.getFullYear()}`} ({data.movie.original_language.toUpperCase()})
+              {`${(releaseDate.getDate().toString().length === 1 ? "0" + releaseDate.getDate() : releaseDate.getDate())}/${(releaseDate.getMonth().toString().length === 1 ? "0" + releaseDate.getMonth() : releaseDate.getMonth())}/${releaseDate.getFullYear()}`} ({data.movie.original_language.toUpperCase()})
               <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{data.movie.genres.map(genre => genre.name).join(', ')}</span> <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{Math.floor(data.movie.runtime/60)}h {data.movie.runtime%60}m</span>
             </p>
             <div className="flex items-center mb-8">
