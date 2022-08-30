@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import MovieCard from '../Components/MovieCard';
 import PersonCard from '../Components/PersonCard';
 
-const URL = "https://image.tmdb.org/t/p/original";
+const BASE_URL = "https://image.tmdb.org/t/p/";
+const POSTER_SIZE = "w342";
 
 function Movie() {
   const params = useParams();
@@ -65,10 +66,11 @@ function Movie() {
 
   return (
     <div>
+      <link rel="preload" as="image" href={BASE_URL + POSTER_SIZE + data.movie.poster_path} />
       <section className="flex justify-center items-center bg-purple-custom text-white px-5 md:px-4 py-10 pb-16 md:py-14">
         <div className="flex flex-col md:flex-row w-full max-w-7xl">
           <div className="flex justify-center pb-10 md:w-96 md:shrink-0 md:mr-8">
-            <img className="w-48 md:w-96 md:absolute shadow-md rounded" width="383" height="574" alt="" src={URL + data.movie.poster_path}/>
+            <img className="w-48 md:w-96 md:absolute shadow-md rounded" width="383" height="574" alt="" src={BASE_URL + POSTER_SIZE + data.movie.poster_path}/>
           </div>
           <div className="text-left">
             <h1 className="text-3xl font-bold mb-2">{data.movie.original_title} ({releaseDate.getFullYear()})</h1>

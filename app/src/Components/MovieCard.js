@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const URL = "https://image.tmdb.org/t/p/original";
+const URL = "https://image.tmdb.org/t/p/w185";
 const MONTH_NAME = {
   "1": "JAN",
   "2": "FEB",

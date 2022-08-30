@@ -7,7 +7,7 @@ function Header() {
       <section className="flex justify-center items-center">
         <div className="w-full max-w-7xl">
           <Link className="flex justify-center md:justify-start" to="/">
-            <img src={logo} alt="TMDB Logo" />
+            <img width="185" height="24" src={logo} alt="TMDB Logo" />
           </Link>
         </div>
       </section>
