@@ -861,6 +861,10 @@ video {
     display: inline-block;
   }
 
+  .md\:h-72 {
+    height: 18rem;
+  }
+
   .md\:w-96 {
     width: 24rem;
   }
@@ -907,9 +911,9 @@ video {
     padding-bottom: 3.5rem;
   }
 
-  .md\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  .md\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .md\:text-center {
@@ -918,6 +922,10 @@ video {
 }
 
 @media (min-width: 1024px) {
+  .lg\:h-80 {
+    height: 20rem;
+  }
+
   .lg\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
