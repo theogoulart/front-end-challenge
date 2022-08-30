@@ -8,13 +8,13 @@ import Pagination from '../Components/Pagination'
 function List() {
   const params = useParams();
   const page = params.page || 1;
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState({total_pages: 0, results: []});
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${page}`)
       .then(response => response.json())
-      .then(data => setMovies(data.results));
+      .then(data => setMovies(data));
   }, [page]);
 
   useEffect(() => {
@@ -34,9 +34,9 @@ function List() {
       </section>
       <section className="flex flex-col items-center justify-center pb-40">
         <div className="max-w-7xl grid gap-x-12 gap-y-12 grid-cols-2 md:grid-cols-4 xl:grid-cols-6 my-8">
-        {movies.map((movie) => (<MovieCard key={`movie-${movie.id}`} movie={movie}/>))}
+        {movies.results.map((movie) => (<MovieCard key={`movie-${movie.id}`} movie={movie}/>))}
         </div>
-        <Pagination pages={6} />
+        <Pagination pages={movies.total_pages} />
       </section>
     </div>
   );

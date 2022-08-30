@@ -48,11 +48,11 @@ function Movie() {
   }, [movieID]);
 
   if (data.length === 0) return (<div>404</div>);
-  
+  console.log(data);
   const releaseDate = new Date(data.movie.release_date);
 
   const crew = data.credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
-  const trailer = data.videos.filter(v => v.type === "Trailer")[0];
+  const trailer = data.videos.length > 0 ? data.videos.filter(v => v.type === "Trailer")[0] : null;
 
   const movieRatings = [];
   data.reviews.forEach((item) => {
@@ -62,7 +62,6 @@ function Movie() {
   });
   const movieRating = Math.floor((movieRatings.reduce((p,c) => p+c, 0) / movieRatings.length) * 10);
 
-  console.log(trailer);
   return (
     <div>
       <section className="flex justify-center items-center bg-purple-custom text-white px-5 md:px-4 py-10 pb-16 md:py-14">
@@ -73,19 +72,19 @@ function Movie() {
           <div className="text-left">
             <h1 className="text-3xl font-bold mb-2">{data.movie.original_title} ({releaseDate.getFullYear()})</h1>
             <p className="text-lg mb-8 md:mb-4">
-              {`${("0" + releaseDate.getDate()).substring(-2)}/${("0" + releaseDate.getMonth()).substring(-2)}/${releaseDate.getFullYear()}`} (BR)
+              {`${("0" + releaseDate.getDate()).substring(-2)}/${("0" + releaseDate.getMonth()).substring(-2)}/${releaseDate.getFullYear()}`} ({data.movie.original_language.toUpperCase()})
               <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{data.movie.genres.map(genre => genre.name).join(', ')}</span> <span className="hidden md:inline-block ml-1">•</span> <span className="block md:inline-block">{Math.floor(data.movie.runtime/60)}h {data.movie.runtime%60}m</span>
             </p>
             <div className="flex items-center mb-8">
-              <div className={`progress-radial progress-${movieRating}`}><b></b></div>
+              <div className={`progress-radial progress-${movieRating || 0}`}><b></b></div>
               <p className="leading-5 ml-3">Avaliação dos<br/>usuários</p>
             </div>
             <div className="md:h-72">
               <h2 className="text-xl font-bold mb-2">Sinopse</h2>
               <p className="max-w-3xl mb-6">{data.movie.overview}</p>
               <div className="grid gap-y-6 grid-cols-2 md:grid-cols-3">
-                {crew.slice(0,6).map(c => (
-                  <div>
+                {crew.slice(0,6).map((c,i) => (
+                  <div key={`crew${i}`}>
                     <div className="font-bold">{c.name}</div>
                     <div>{c.job}</div>
                   </div>
@@ -99,16 +98,20 @@ function Movie() {
         <div className="flex flex-col w-full max-w-7xl">
           <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Elenco original</h2>
           <div className="flex w-full	max-w-7xl overflow-auto pb-6 mb-10">
-            {data.credits.cast.map(c => (<PersonCard person={c}/>))}
+            {data.credits.cast.map((c, i) => (<PersonCard key={`person${i}`} person={c}/>))}
           </div>
-          <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Trailer</h2>
-          <div className="video-container max-w-4xl mb-14">
-            <iframe title="movie trailer" className="w-full" src={`https://www.youtube.com/embed/${trailer.key}`}/>
-          </div>
-          <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Recomendações</h2>
-          <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 lg:grid-cols-6 w-full max-w-7xl pb-6 mb-10">
-            {data.recommendations.slice(0,6).map(v => (<MovieCard movie={v}/>))}
-          </div>
+          {trailer === null ? "" : (<div>
+            <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Trailer</h2>
+            <div className="video-container max-w-4xl mb-14">
+              <iframe title="movie trailer" className="w-full" src={`https://www.youtube.com/embed/${trailer.key}`}/>
+            </div>
+          </div>)}
+          {data.recommendations.length === 0 ? "" : (<div>
+            <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Recomendações</h2>
+            <div className="grid grid-cols-2 gap-y-6 md:grid-cols-4 lg:grid-cols-6 w-full max-w-7xl pb-6 mb-10">
+              {data.recommendations.slice(0,6).map(v => (<MovieCard key={v.id} movie={v}/>))}
+            </div>
+          </div>)}
         </div>
       </section>
     </div>
