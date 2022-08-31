@@ -922,10 +922,6 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:h-80 {
-    height: 20rem;
-  }
-
   .lg\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }

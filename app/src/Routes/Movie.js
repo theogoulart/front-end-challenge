@@ -14,37 +14,30 @@ function Movie() {
 
   useEffect(() => {
     try {
-      async function fetchData() {
-        const movieResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${process.env.REACT_APP_API_KEY}`);
-        const movie = await movieResponse.json();
-    
-        const creditsResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-        const credits = await creditsResponse.json();
-        
-        const reviewsResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/reviews?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-        const reviews = await reviewsResponse.json();
-        
-        const videosResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`);
-        const videos = await videosResponse.json();
-        
-        const recommResponse = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`);
-        const recommendations = await recommResponse.json();
-    
-        setData({
-          movie: movie,
-          credits: {
-            cast: credits.cast,
-            crew: credits.crew
-          },
-          reviews: reviews.results,
-          videos: videos.results,
-          recommendations: recommendations.results
-        });
-      }
+      const urls = [  
+        `https://api.themoviedb.org/3/movie/${movieID}?api_key=${process.env.REACT_APP_API_KEY}`,
+        `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${movieID}/reviews?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${movieID}/recommendations?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
+      ];
 
-      fetchData();
-    } catch (exception) {
-      console.error(404);
+      Promise.all(urls.map(u=>fetch(u))).then(responses =>
+        Promise.all(responses.map(res => res.json()))
+      ).then((data) => {
+        setData({
+          movie: data[0],
+          credits: {
+            cast: data[1].cast,
+            crew: data[1].crew
+          },
+          reviews: data[2].results,
+          videos: data[3].results,
+          recommendations: data[4].results
+        });
+      });
+    } catch (expt) {
+      console.error(expt);
     }
     window.scrollTo(0, 0);
   }, [movieID]);
