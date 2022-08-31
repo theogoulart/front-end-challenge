@@ -39,3 +39,22 @@ code {
   width: 100%;
   height: 100%;
 }
+
+.filter-btn {
+  background-color: #D18000;
+  position: relative;
+}
+
+.filter-btn::after {
+  background-color: #fff;
+  border-radius: 50%;
+  color: #D18000;
+  content: '✖';
+  font-size: 10px;
+  height: 16px;
+  line-height: 18px;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  width: 16px;
+}

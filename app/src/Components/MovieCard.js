@@ -16,8 +16,7 @@ const MONTH_NAME = {
   "12": "DEC"
 };
 
-function MovieCard(props) {
-  const movie = props.movie;
+function MovieCard({ movie }) {
   const releaseDate = new Date(movie.release_date);
 
   const formatedDate = (releaseDate.getDate().toString().length === 1 ? "0" + releaseDate.getDate() : releaseDate.getDate()) + " "
