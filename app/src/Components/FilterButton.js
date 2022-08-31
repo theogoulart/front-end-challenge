@@ -3,7 +3,7 @@ function FilterButton({ isSelected, genre, clickHandler }) {
 
   return (
     <button onClick={() => {clickHandler()}} className={`${styleClass} font-bold px-4 py-2 my-2 mr-4 rounded`}>
-      {genre}
+      {genre.name}
     </button>
   );
 }
