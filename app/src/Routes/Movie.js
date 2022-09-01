@@ -47,7 +47,7 @@ function Movie() {
   const releaseDate = new Date(data.movie.release_date);
 
   const crew = data.credits.crew.filter(v => ['Characters', 'Director', 'Screenplay'].includes(v.job));
-  const trailer = data.videos.length > 0 ? data.videos.filter(v => v.type === "Trailer")[0] : null;
+  const trailer = data.videos.length > 0 ? data.videos.filter(v => v.type === "Trailer")[0] : undefined;
 
   const movieRatings = [];
   data.reviews.forEach((item) => {
@@ -96,7 +96,7 @@ function Movie() {
           <div className="flex w-full	max-w-7xl overflow-auto pb-6 mb-10">
             {data.credits.cast.map((c, i) => (<PersonCard key={`person${i}`} person={c}/>))}
           </div>
-          {trailer === null ? "" : (<div>
+          {trailer === undefined ? "" : (<div>
             <h2 className="text-neutral-900 text-2xl font-bold mb-4 md:mb-8">Trailer</h2>
             <div className="video-container max-w-4xl mb-14">
               <iframe title="movie trailer" className="w-full" src={`https://www.youtube.com/embed/${trailer.key}`}/>

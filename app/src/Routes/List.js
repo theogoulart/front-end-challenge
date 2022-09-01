@@ -22,7 +22,6 @@ function List() {
   const [genres, setGenres] = useState([]);
   const [filters, setFilters] = useState(query.get("genres")?.split(',').map(v => parseInt(v)) || []);
 
-  console.log(filters);
   const filterHandler = (option, filters) => {
     const index = filters.indexOf(option);
     const newFilters = index > -1 ? 
