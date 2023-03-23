@@ -20,7 +20,7 @@ function MovieCard({ movie }) {
   const releaseDate = new Date(movie.release_date);
 
   const formatedDate = (releaseDate.getDate().toString().length === 1 ? "0" + releaseDate.getDate() : releaseDate.getDate()) + " "
-    + MONTH_NAME[releaseDate.getMonth()] + " "
+    + MONTH_NAME[releaseDate.getMonth() + 1] + " "
     + releaseDate.getFullYear();
 
   return (
